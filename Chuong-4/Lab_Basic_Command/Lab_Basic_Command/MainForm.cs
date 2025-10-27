@@ -284,5 +284,39 @@ namespace Lab_Basic_Command
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
         }
+
+        // Menu event handlers
+        private void menuCategory_Click(object sender, EventArgs e)
+        {
+            CategoryForm categoryForm = new CategoryForm();
+            categoryForm.Show();
+        }
+
+        private void menuFood_Click(object sender, EventArgs e)
+        {
+            FoodForm foodForm = new FoodForm();
+            foodForm.Show();
+        }
+
+        private void menuAccount_Click(object sender, EventArgs e)
+        {
+            AccountManager accountManager = new AccountManager();
+            accountManager.Show();
+        }
+
+        private void menuExit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc chắn muốn thoát?",
+                "Xác nhận thoát",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

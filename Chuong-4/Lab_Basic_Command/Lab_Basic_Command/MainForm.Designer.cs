@@ -50,13 +50,21 @@ namespace Lab_Basic_Command
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuHeThong = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuQuanLy = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFood = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(12, 198);
+            this.btnLoad.Location = new System.Drawing.Point(12, 226);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(123, 36);
             this.btnLoad.TabIndex = 5;
@@ -75,10 +83,10 @@ namespace Lab_Basic_Command
             this.lvTable.FullRowSelect = true;
             this.lvTable.GridLines = true;
             this.lvTable.HideSelection = false;
-            this.lvTable.Location = new System.Drawing.Point(12, 249);
+            this.lvTable.Location = new System.Drawing.Point(12, 277);
             this.lvTable.MultiSelect = false;
             this.lvTable.Name = "lvTable";
-            this.lvTable.Size = new System.Drawing.Size(976, 347);
+            this.lvTable.Size = new System.Drawing.Size(976, 319);
             this.lvTable.TabIndex = 10;
             this.lvTable.UseCompatibleStateImageBehavior = false;
             this.lvTable.View = System.Windows.Forms.View.Details;
@@ -181,7 +189,7 @@ namespace Lab_Basic_Command
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(555, 198);
+            this.btnAdd.Location = new System.Drawing.Point(555, 226);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(110, 36);
             this.btnAdd.TabIndex = 6;
@@ -192,7 +200,7 @@ namespace Lab_Basic_Command
             // btnUpdate
             // 
             this.btnUpdate.Enabled = false;
-            this.btnUpdate.Location = new System.Drawing.Point(686, 198);
+            this.btnUpdate.Location = new System.Drawing.Point(686, 226);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(110, 36);
             this.btnUpdate.TabIndex = 7;
@@ -203,7 +211,7 @@ namespace Lab_Basic_Command
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(817, 198);
+            this.btnDelete.Location = new System.Drawing.Point(817, 226);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(110, 36);
             this.btnDelete.TabIndex = 8;
@@ -226,7 +234,7 @@ namespace Lab_Basic_Command
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(424, 198);
+            this.btnClear.Location = new System.Drawing.Point(424, 226);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(110, 36);
             this.btnClear.TabIndex = 4;
@@ -244,12 +252,74 @@ namespace Lab_Basic_Command
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.txtNotes);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 40);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(976, 167);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin bàn";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuHeThong,
+            this.menuQuanLy});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1000, 28);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuHeThong
+            // 
+            this.menuHeThong.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuExit});
+            this.menuHeThong.Name = "menuHeThong";
+            this.menuHeThong.Size = new System.Drawing.Size(85, 24);
+            this.menuHeThong.Text = "Hệ thống";
+            // 
+            // menuExit
+            // 
+            this.menuExit.Name = "menuExit";
+            this.menuExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.menuExit.Size = new System.Drawing.Size(224, 26);
+            this.menuExit.Text = "Thoát";
+            this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+            // 
+            // menuQuanLy
+            // 
+            this.menuQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuCategory,
+            this.menuFood,
+            this.menuAccount});
+            this.menuQuanLy.Name = "menuQuanLy";
+            this.menuQuanLy.Size = new System.Drawing.Size(73, 24);
+            this.menuQuanLy.Text = "Quản lý";
+            // 
+            // menuCategory
+            // 
+            this.menuCategory.Name = "menuCategory";
+            this.menuCategory.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
+            this.menuCategory.Size = new System.Drawing.Size(279, 26);
+            this.menuCategory.Text = "Nhóm món ăn";
+            this.menuCategory.Click += new System.EventHandler(this.menuCategory_Click);
+            // 
+            // menuFood
+            // 
+            this.menuFood.Name = "menuFood";
+            this.menuFood.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
+            this.menuFood.Size = new System.Drawing.Size(279, 26);
+            this.menuFood.Text = "Món ăn";
+            this.menuFood.Click += new System.EventHandler(this.menuFood_Click);
+            // 
+            // menuAccount
+            // 
+            this.menuAccount.Name = "menuAccount";
+            this.menuAccount.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
+            this.menuAccount.Size = new System.Drawing.Size(279, 26);
+            this.menuAccount.Text = "Tài khoản nhân viên";
+            this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
             // 
             // MainForm
             // 
@@ -263,6 +333,8 @@ namespace Lab_Basic_Command
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnLoad);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý bàn";
@@ -270,7 +342,10 @@ namespace Lab_Basic_Command
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -297,6 +372,13 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmDelete;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuHeThong;
+        private System.Windows.Forms.ToolStripMenuItem menuExit;
+        private System.Windows.Forms.ToolStripMenuItem menuQuanLy;
+        private System.Windows.Forms.ToolStripMenuItem menuCategory;
+        private System.Windows.Forms.ToolStripMenuItem menuFood;
+        private System.Windows.Forms.ToolStripMenuItem menuAccount;
     }
 }
 
