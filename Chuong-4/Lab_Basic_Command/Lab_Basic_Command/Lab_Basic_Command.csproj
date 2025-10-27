@@ -105,6 +105,12 @@
     <Compile Include="TableSelectionForm.Designer.cs">
       <DependentUpon>TableSelectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableBillSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableBillSummaryForm.Designer.cs">
+      <DependentUpon>TableBillSummaryForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AccountManager.resx">
       <DependentUpon>AccountManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TableSelectionForm.resx">
       <DependentUpon>TableSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableBillSummaryForm.resx">
+      <DependentUpon>TableBillSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

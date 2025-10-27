@@ -293,9 +293,9 @@ namespace Lab_Basic_Command
             int tableID = int.Parse(lvTable.SelectedItems[0].SubItems[0].Text);
             string tableName = lvTable.SelectedItems[0].SubItems[1].Text;
 
-            // Mở BillManager với bộ lọc theo bàn
-            MessageBox.Show($"Chức năng xem nhật ký hóa đơn của bàn '{tableName}' sẽ được triển khai sau.", 
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Mở form thống kê hóa đơn theo bàn
+            TableBillSummaryForm summaryForm = new TableBillSummaryForm(tableID, tableName);
+            summaryForm.Show();
         }
 
         private void tsmViewBillHistory_Click(object sender, EventArgs e)
