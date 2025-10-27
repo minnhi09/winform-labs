@@ -39,6 +39,7 @@ namespace Lab_Basic_Command
             this.chNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmViewRoles = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -128,14 +129,22 @@ namespace Lab_Basic_Command
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmViewRoles,
             this.tsmDelete});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(157, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(215, 52);
+            // 
+            // tsmViewRoles
+            // 
+            this.tsmViewRoles.Name = "tsmViewRoles";
+            this.tsmViewRoles.Size = new System.Drawing.Size(214, 24);
+            this.tsmViewRoles.Text = "Xem danh sách vai trò";
+            this.tsmViewRoles.Click += new System.EventHandler(this.tsmViewRoles_Click);
             // 
             // tsmDelete
             // 
             this.tsmDelete.Name = "tsmDelete";
-            this.tsmDelete.Size = new System.Drawing.Size(156, 24);
+            this.tsmDelete.Size = new System.Drawing.Size(214, 24);
             this.tsmDelete.Text = "Xóa tài khoản";
             this.tsmDelete.Click += new System.EventHandler(this.tsmDelete_Click);
             // 
@@ -378,6 +387,7 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmViewRoles;
     }
 }
 

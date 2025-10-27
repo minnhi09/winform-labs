@@ -370,6 +370,22 @@ namespace Lab_Basic_Command
                 btnDelete.PerformClick();
         }
 
+        private void tsmViewRoles_Click(object sender, EventArgs e)
+        {
+            if (lvAccount.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản cần xem vai trò");
+                return;
+            }
+
+            var item = lvAccount.SelectedItems[0];
+            int accountID = int.Parse(item.SubItems[0].Text);
+            string username = item.SubItems[1].Text;
+
+            AccountRoleManager roleManager = new AccountRoleManager(accountID, username);
+            roleManager.ShowDialog();
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearForm();
