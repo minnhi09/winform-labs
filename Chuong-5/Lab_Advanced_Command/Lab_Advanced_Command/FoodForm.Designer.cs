@@ -28,6 +28,7 @@ namespace Lab_Advanced_Command
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblTitle = new Label();
             lblCategory = new Label();
             cboCategory = new ComboBox();
@@ -38,7 +39,11 @@ namespace Lab_Advanced_Command
             colCategoryName = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
             colNotes = new DataGridViewTextBoxColumn();
+            contextMenuFood = new ContextMenuStrip(components);
+            menuItemAdd = new ToolStripMenuItem();
+            menuItemUpdate = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dgvFood).BeginInit();
+            contextMenuFood.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -81,6 +86,7 @@ namespace Lab_Advanced_Command
             dgvFood.BackgroundColor = SystemColors.Window;
             dgvFood.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvFood.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colUnit, colCategoryName, colPrice, colNotes });
+            dgvFood.ContextMenuStrip = contextMenuFood;
             dgvFood.Location = new Point(14, 133);
             dgvFood.Margin = new Padding(3, 4, 3, 4);
             dgvFood.Name = "dgvFood";
@@ -144,6 +150,27 @@ namespace Lab_Advanced_Command
             colNotes.Name = "colNotes";
             colNotes.ReadOnly = true;
             // 
+            // contextMenuFood
+            // 
+            contextMenuFood.ImageScalingSize = new Size(20, 20);
+            contextMenuFood.Items.AddRange(new ToolStripItem[] { menuItemAdd, menuItemUpdate });
+            contextMenuFood.Name = "contextMenuFood";
+            contextMenuFood.Size = new Size(211, 80);
+            // 
+            // menuItemAdd
+            // 
+            menuItemAdd.Name = "menuItemAdd";
+            menuItemAdd.Size = new Size(210, 24);
+            menuItemAdd.Text = "➕ Thêm món ăn mới";
+            menuItemAdd.Click += menuItemAdd_Click;
+            // 
+            // menuItemUpdate
+            // 
+            menuItemUpdate.Name = "menuItemUpdate";
+            menuItemUpdate.Size = new Size(210, 24);
+            menuItemUpdate.Text = "✏️ Cập nhật món ăn";
+            menuItemUpdate.Click += menuItemUpdate_Click;
+            // 
             // FoodForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -161,6 +188,7 @@ namespace Lab_Advanced_Command
             Text = "Quản lý món ăn";
             Load += FoodForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvFood).EndInit();
+            contextMenuFood.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,5 +205,8 @@ namespace Lab_Advanced_Command
         private DataGridViewTextBoxColumn colCategoryName;
         private DataGridViewTextBoxColumn colPrice;
         private DataGridViewTextBoxColumn colNotes;
+        private ContextMenuStrip contextMenuFood;
+        private ToolStripMenuItem menuItemAdd;
+        private ToolStripMenuItem menuItemUpdate;
     }
 }
