@@ -310,9 +310,9 @@ namespace Lab_Basic_Command
             int tableID = int.Parse(lvTable.SelectedItems[0].SubItems[0].Text);
             string tableName = lvTable.SelectedItems[0].SubItems[1].Text;
 
-            // TODO: Sẽ thực hiện khi bạn mô tả chi tiết chức năng
-            MessageBox.Show($"Chức năng xem nhật ký hóa đơn của bàn '{tableName}' sẽ được triển khai sau.", 
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Mở form nhật ký hóa đơn theo bàn
+            TableBillHistoryForm historyForm = new TableBillHistoryForm(tableID, tableName);
+            historyForm.Show();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
