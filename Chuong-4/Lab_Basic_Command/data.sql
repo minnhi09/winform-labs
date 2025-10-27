@@ -4,11 +4,11 @@ GO
 -- Insert Categories
 SET IDENTITY_INSERT [dbo].[Category] ON
 INSERT INTO [dbo].[Category] ([ID], [Name], [Type]) VALUES
-(1, N'Món khai vị', 1),
-(2, N'Món chính', 1),
-(3, N'Món tráng miệng', 1),
-(4, N'Nước giải khát', 2),
-(5, N'Đồ uống có cồn', 2)
+(1, N'Món khai vị', 0),
+(2, N'Món chính', 0),
+(3, N'Món tráng miệng', 0),
+(4, N'Nước giải khát', 1),
+(5, N'Đồ uống có cồn', 1)
 SET IDENTITY_INSERT [dbo].[Category] OFF
 GO
 
