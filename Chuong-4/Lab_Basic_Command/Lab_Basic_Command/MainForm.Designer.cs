@@ -37,6 +37,9 @@ namespace Lab_Basic_Command
             this.chNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmViewBills = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmViewBillHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -122,9 +125,31 @@ namespace Lab_Basic_Command
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmViewBills,
+            this.tsmViewBillHistory,
+            this.toolStripSeparator2,
             this.tsmDelete});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 88);
+            // 
+            // tsmViewBills
+            // 
+            this.tsmViewBills.Name = "tsmViewBills";
+            this.tsmViewBills.Size = new System.Drawing.Size(210, 24);
+            this.tsmViewBills.Text = "Xem danh sách hóa đơn";
+            this.tsmViewBills.Click += new System.EventHandler(this.tsmViewBills_Click);
+            // 
+            // tsmViewBillHistory
+            // 
+            this.tsmViewBillHistory.Name = "tsmViewBillHistory";
+            this.tsmViewBillHistory.Size = new System.Drawing.Size(210, 24);
+            this.tsmViewBillHistory.Text = "Xem nhật ký hóa đơn";
+            this.tsmViewBillHistory.Click += new System.EventHandler(this.tsmViewBillHistory_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
             // 
             // tsmDelete
             // 
@@ -423,6 +448,9 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmViewBills;
+        private System.Windows.Forms.ToolStripMenuItem tsmViewBillHistory;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuHeThong;
         private System.Windows.Forms.ToolStripMenuItem menuExit;

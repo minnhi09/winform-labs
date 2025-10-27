@@ -281,6 +281,40 @@ namespace Lab_Basic_Command
                 btnDelete.PerformClick();
         }
 
+        private void tsmViewBills_Click(object sender, EventArgs e)
+        {
+            if (lvTable.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn bàn", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int tableID = int.Parse(lvTable.SelectedItems[0].SubItems[0].Text);
+            string tableName = lvTable.SelectedItems[0].SubItems[1].Text;
+
+            // Mở BillManager với bộ lọc theo bàn
+            MessageBox.Show($"Chức năng xem nhật ký hóa đơn của bàn '{tableName}' sẽ được triển khai sau.", 
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tsmViewBillHistory_Click(object sender, EventArgs e)
+        {
+            if (lvTable.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn bàn", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int tableID = int.Parse(lvTable.SelectedItems[0].SubItems[0].Text);
+            string tableName = lvTable.SelectedItems[0].SubItems[1].Text;
+
+            // TODO: Sẽ thực hiện khi bạn mô tả chi tiết chức năng
+            MessageBox.Show($"Chức năng xem nhật ký hóa đơn của bàn '{tableName}' sẽ được triển khai sau.", 
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearForm();
