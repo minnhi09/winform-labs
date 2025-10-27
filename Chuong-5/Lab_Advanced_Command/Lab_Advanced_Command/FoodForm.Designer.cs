@@ -32,10 +32,12 @@ namespace Lab_Advanced_Command
             lblCategory = new Label();
             cboCategory = new ComboBox();
             dgvFood = new DataGridView();
-            colFoodId = new DataGridViewTextBoxColumn();
-            colFoodName = new DataGridViewTextBoxColumn();
+            colID = new DataGridViewTextBoxColumn();
+            colName = new DataGridViewTextBoxColumn();
+            colUnit = new DataGridViewTextBoxColumn();
             colCategoryName = new DataGridViewTextBoxColumn();
             colPrice = new DataGridViewTextBoxColumn();
+            colNotes = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvFood).BeginInit();
             SuspendLayout();
             // 
@@ -43,9 +45,9 @@ namespace Lab_Advanced_Command
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitle.Location = new Point(12, 9);
+            lblTitle.Location = new Point(14, 12);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(279, 30);
+            lblTitle.Size = new Size(421, 37);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "QUẢN LÝ DANH SÁCH MÓN ĂN";
             // 
@@ -53,9 +55,9 @@ namespace Lab_Advanced_Command
             // 
             lblCategory.AutoSize = true;
             lblCategory.Font = new Font("Segoe UI", 10F);
-            lblCategory.Location = new Point(12, 60);
+            lblCategory.Location = new Point(14, 80);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(111, 19);
+            lblCategory.Size = new Size(126, 23);
             lblCategory.TabIndex = 1;
             lblCategory.Text = "Nhóm món ăn:";
             // 
@@ -64,10 +66,12 @@ namespace Lab_Advanced_Command
             cboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cboCategory.Font = new Font("Segoe UI", 10F);
             cboCategory.FormattingEnabled = true;
-            cboCategory.Location = new Point(129, 57);
+            cboCategory.Location = new Point(147, 76);
+            cboCategory.Margin = new Padding(3, 4, 3, 4);
             cboCategory.Name = "cboCategory";
-            cboCategory.Size = new Size(300, 25);
+            cboCategory.Size = new Size(342, 31);
             cboCategory.TabIndex = 2;
+            cboCategory.SelectedIndexChanged += cboCategory_SelectedIndexChanged;
             // 
             // dgvFood
             // 
@@ -76,60 +80,86 @@ namespace Lab_Advanced_Command
             dgvFood.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvFood.BackgroundColor = SystemColors.Window;
             dgvFood.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFood.Columns.AddRange(new DataGridViewColumn[] { colFoodId, colFoodName, colCategoryName, colPrice });
-            dgvFood.Location = new Point(12, 100);
+            dgvFood.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colUnit, colCategoryName, colPrice, colNotes });
+            dgvFood.Location = new Point(14, 133);
+            dgvFood.Margin = new Padding(3, 4, 3, 4);
             dgvFood.Name = "dgvFood";
             dgvFood.ReadOnly = true;
+            dgvFood.RowHeadersWidth = 51;
             dgvFood.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFood.Size = new Size(760, 338);
+            dgvFood.Size = new Size(869, 451);
             dgvFood.TabIndex = 3;
             // 
-            // colFoodId
+            // colID
             // 
-            colFoodId.DataPropertyName = "FoodId";
-            colFoodId.FillWeight = 60F;
-            colFoodId.HeaderText = "Mã món";
-            colFoodId.Name = "colFoodId";
-            colFoodId.ReadOnly = true;
+            colID.DataPropertyName = "ID";
+            colID.FillWeight = 50F;
+            colID.HeaderText = "Mã món";
+            colID.MinimumWidth = 6;
+            colID.Name = "colID";
+            colID.ReadOnly = true;
             // 
-            // colFoodName
+            // colName
             // 
-            colFoodName.DataPropertyName = "FoodName";
-            colFoodName.FillWeight = 120F;
-            colFoodName.HeaderText = "Tên món ăn";
-            colFoodName.Name = "colFoodName";
-            colFoodName.ReadOnly = true;
+            colName.DataPropertyName = "Name";
+            colName.FillWeight = 120F;
+            colName.HeaderText = "Tên món ăn";
+            colName.MinimumWidth = 6;
+            colName.Name = "colName";
+            colName.ReadOnly = true;
+            // 
+            // colUnit
+            // 
+            colUnit.DataPropertyName = "Unit";
+            colUnit.FillWeight = 60F;
+            colUnit.HeaderText = "Đơn vị";
+            colUnit.MinimumWidth = 6;
+            colUnit.Name = "colUnit";
+            colUnit.ReadOnly = true;
             // 
             // colCategoryName
             // 
             colCategoryName.DataPropertyName = "CategoryName";
-            colCategoryName.FillWeight = 100F;
+            colCategoryName.FillWeight = 90F;
             colCategoryName.HeaderText = "Nhóm món ăn";
+            colCategoryName.MinimumWidth = 6;
             colCategoryName.Name = "colCategoryName";
             colCategoryName.ReadOnly = true;
             // 
             // colPrice
             // 
             colPrice.DataPropertyName = "Price";
-            colPrice.FillWeight = 80F;
-            colPrice.HeaderText = "Giá";
+            colPrice.FillWeight = 70F;
+            colPrice.HeaderText = "Đơn giá";
+            colPrice.MinimumWidth = 6;
             colPrice.Name = "colPrice";
             colPrice.ReadOnly = true;
             // 
+            // colNotes
+            // 
+            colNotes.DataPropertyName = "Notes";
+            colNotes.FillWeight = 130F;
+            colNotes.HeaderText = "Ghi chú";
+            colNotes.MinimumWidth = 6;
+            colNotes.Name = "colNotes";
+            colNotes.ReadOnly = true;
+            // 
             // FoodForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 450);
+            ClientSize = new Size(896, 600);
             Controls.Add(dgvFood);
             Controls.Add(cboCategory);
             Controls.Add(lblCategory);
             Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "FoodForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản lý món ăn";
+            Load += FoodForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvFood).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -141,9 +171,11 @@ namespace Lab_Advanced_Command
         private Label lblCategory;
         private ComboBox cboCategory;
         private DataGridView dgvFood;
-        private DataGridViewTextBoxColumn colFoodId;
-        private DataGridViewTextBoxColumn colFoodName;
+        private DataGridViewTextBoxColumn colID;
+        private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colUnit;
         private DataGridViewTextBoxColumn colCategoryName;
         private DataGridViewTextBoxColumn colPrice;
+        private DataGridViewTextBoxColumn colNotes;
     }
 }
