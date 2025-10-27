@@ -59,6 +59,7 @@ namespace Lab_Basic_Command
             this.menuCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFood = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBill = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1.SuspendLayout();
@@ -312,7 +313,8 @@ namespace Lab_Basic_Command
             this.menuQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCategory,
             this.menuFood,
-            this.menuAccount});
+            this.menuAccount,
+            this.menuBill});
             this.menuQuanLy.Name = "menuQuanLy";
             this.menuQuanLy.Size = new System.Drawing.Size(73, 24);
             this.menuQuanLy.Text = "Quản lý";
@@ -340,6 +342,14 @@ namespace Lab_Basic_Command
             this.menuAccount.Size = new System.Drawing.Size(279, 26);
             this.menuAccount.Text = "Tài khoản nhân viên";
             this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
+            // 
+            // menuBill
+            // 
+            this.menuBill.Name = "menuBill";
+            this.menuBill.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
+            this.menuBill.Size = new System.Drawing.Size(279, 26);
+            this.menuBill.Text = "Hóa đơn";
+            this.menuBill.Click += new System.EventHandler(this.menuBill_Click);
             // 
             // statusStrip1
             // 
@@ -420,6 +430,7 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.ToolStripMenuItem menuCategory;
         private System.Windows.Forms.ToolStripMenuItem menuFood;
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
+        private System.Windows.Forms.ToolStripMenuItem menuBill;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.StatusStrip statusStrip1;

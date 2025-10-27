@@ -307,6 +307,12 @@ namespace Lab_Basic_Command
             accountManager.Show();
         }
 
+        private void menuBill_Click(object sender, EventArgs e)
+        {
+            BillManager billManager = new BillManager();
+            billManager.Show();
+        }
+
         private void menuExit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(

@@ -59,6 +59,18 @@
     <Compile Include="AccountRoleManager.Designer.cs">
       <DependentUpon>AccountRoleManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="BillManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillManager.Designer.cs">
+      <DependentUpon>BillManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BillDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BillDetailForm.Designer.cs">
+      <DependentUpon>BillDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +104,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AccountRoleManager.resx">
       <DependentUpon>AccountRoleManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillManager.resx">
+      <DependentUpon>BillManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BillDetailForm.resx">
+      <DependentUpon>BillDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CategoryForm.resx">
       <DependentUpon>CategoryForm.cs</DependentUpon>
