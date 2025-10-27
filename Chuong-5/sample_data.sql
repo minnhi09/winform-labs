@@ -11,22 +11,49 @@ GO
 -- =============================================
 -- Clear existing data (if any)
 -- =============================================
-DELETE FROM BillDetails;
-DELETE FROM Bills;
-DELETE FROM AccountRoles;
-DELETE FROM Accounts;
-DELETE FROM Roles;
-DELETE FROM Foods;
-DELETE FROM Categories;
+-- Delete in correct order (child tables first)
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'BillDetails')
+    DELETE FROM BillDetails;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Bills')
+    DELETE FROM Bills;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AccountRoles')
+    DELETE FROM AccountRoles;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Foods')
+    DELETE FROM Foods;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Accounts')
+    DELETE FROM Accounts;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Roles')
+    DELETE FROM Roles;
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Categories')
+    DELETE FROM Categories;
 
 -- Reset identity columns
-DBCC CHECKIDENT ('BillDetails', RESEED, 0);
-DBCC CHECKIDENT ('Bills', RESEED, 0);
-DBCC CHECKIDENT ('AccountRoles', RESEED, 0);
-DBCC CHECKIDENT ('Accounts', RESEED, 0);
-DBCC CHECKIDENT ('Roles', RESEED, 0);
-DBCC CHECKIDENT ('Foods', RESEED, 0);
-DBCC CHECKIDENT ('Categories', RESEED, 0);
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'BillDetails')
+    DBCC CHECKIDENT ('BillDetails', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Bills')
+    DBCC CHECKIDENT ('Bills', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AccountRoles')
+    DBCC CHECKIDENT ('AccountRoles', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Foods')
+    DBCC CHECKIDENT ('Foods', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Accounts')
+    DBCC CHECKIDENT ('Accounts', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Roles')
+    DBCC CHECKIDENT ('Roles', RESEED, 0);
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Categories')
+    DBCC CHECKIDENT ('Categories', RESEED, 0);
 
 PRINT 'Existing data cleared.';
 GO
@@ -199,37 +226,37 @@ PRINT '';
 -- Show row counts
 SELECT 
     'Categories' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM Categories
 UNION ALL
 SELECT 
     'Foods' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM Foods
 UNION ALL
 SELECT 
     'Roles' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM Roles
 UNION ALL
 SELECT 
     'Accounts' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM Accounts
 UNION ALL
 SELECT 
     'AccountRoles' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM AccountRoles
 UNION ALL
 SELECT 
     'Bills' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM Bills
 UNION ALL
 SELECT 
     'BillDetails' as TableName, 
-    COUNT(*) as RowCount 
+    COUNT(*) as RecordCount 
 FROM BillDetails;
 GO
 
