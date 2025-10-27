@@ -17,7 +17,27 @@ namespace Lab_Basic_Command
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new MainForm());
+            // Hiển thị form đăng nhập trước
+            LoginForm loginForm = new LoginForm();
+            
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                // Lưu thông tin đăng nhập vào SessionManager
+                SessionManager.Login(
+                    loginForm.LoggedInAccountID,
+                    loginForm.LoggedInUsername,
+                    loginForm.LoggedInDisplayName
+                );
+
+                // Nếu đăng nhập thành công, mở MainForm
+                Application.Run(new MainForm());
+            }
+            else
+            {
+                // Nếu người dùng hủy đăng nhập, thoát ứng dụng
+                Application.Exit();
+            }
+            
             // Application.Run(new CategoryForm());
             // Application.Run(new FoodForm());
         }

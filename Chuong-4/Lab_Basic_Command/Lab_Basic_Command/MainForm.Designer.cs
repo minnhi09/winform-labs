@@ -52,14 +52,19 @@ namespace Lab_Basic_Command
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuHeThong = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuQuanLy = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFood = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccount = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblUserInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoad
@@ -274,10 +279,25 @@ namespace Lab_Basic_Command
             // menuHeThong
             // 
             this.menuHeThong.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLogout,
+            this.toolStripSeparator1,
             this.menuExit});
             this.menuHeThong.Name = "menuHeThong";
             this.menuHeThong.Size = new System.Drawing.Size(85, 24);
             this.menuHeThong.Text = "Hệ thống";
+            // 
+            // menuLogout
+            // 
+            this.menuLogout.Name = "menuLogout";
+            this.menuLogout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.menuLogout.Size = new System.Drawing.Size(224, 26);
+            this.menuLogout.Text = "Đăng xuất";
+            this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // menuExit
             // 
@@ -321,11 +341,30 @@ namespace Lab_Basic_Command
             this.menuAccount.Text = "Tài khoản nhân viên";
             this.menuAccount.Click += new System.EventHandler(this.menuAccount_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblUserInfo});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 608);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1000, 26);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblUserInfo
+            // 
+            this.lblUserInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblUserInfo.Name = "lblUserInfo";
+            this.lblUserInfo.Size = new System.Drawing.Size(134, 20);
+            this.lblUserInfo.Text = "Người dùng: Admin";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 608);
+            this.ClientSize = new System.Drawing.Size(1000, 634);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lvTable);
@@ -344,6 +383,8 @@ namespace Lab_Basic_Command
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,6 +420,10 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.ToolStripMenuItem menuCategory;
         private System.Windows.Forms.ToolStripMenuItem menuFood;
         private System.Windows.Forms.ToolStripMenuItem menuAccount;
+        private System.Windows.Forms.ToolStripMenuItem menuLogout;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserInfo;
     }
 }
 

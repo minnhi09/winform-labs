@@ -23,6 +23,9 @@ namespace Lab_Basic_Command
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // Hiển thị thông tin người dùng đã đăng nhập
+            lblUserInfo.Text = $"Người dùng: {SessionManager.GetUserInfo()}";
+            
             // Load danh sách bàn khi form khởi động
             btnLoad.PerformClick();
         }
@@ -316,6 +319,46 @@ namespace Lab_Basic_Command
             if (result == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void menuLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất?",
+                "Xác nhận đăng xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                // Xóa thông tin đăng nhập
+                SessionManager.Logout();
+                
+                // Đóng form hiện tại
+                this.Close();
+                
+                // Hiển thị form đăng nhập
+                LoginForm loginForm = new LoginForm();
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Lưu thông tin đăng nhập mới
+                    SessionManager.Login(
+                        loginForm.LoggedInAccountID,
+                        loginForm.LoggedInUsername,
+                        loginForm.LoggedInDisplayName
+                    );
+                    
+                    // Mở lại MainForm
+                    MainForm newMainForm = new MainForm();
+                    newMainForm.Show();
+                }
+                else
+                {
+                    // Nếu không đăng nhập, thoát ứng dụng
+                    Application.Exit();
+                }
             }
         }
     }
