@@ -64,6 +64,7 @@ namespace Lab_Basic_Command
             this.chNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnViewDetail = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnNewBill = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -79,6 +80,7 @@ namespace Lab_Basic_Command
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnNewBill);
             this.groupBox1.Controls.Add(this.btnExport);
             this.groupBox1.Controls.Add(this.btnClearFilter);
             this.groupBox1.Controls.Add(this.btnLoad);
@@ -106,6 +108,19 @@ namespace Lab_Basic_Command
             this.btnExport.Text = "Xuất báo cáo";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnNewBill
+            // 
+            this.btnNewBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnNewBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewBill.ForeColor = System.Drawing.Color.White;
+            this.btnNewBill.Location = new System.Drawing.Point(23, 25);
+            this.btnNewBill.Name = "btnNewBill";
+            this.btnNewBill.Size = new System.Drawing.Size(150, 50);
+            this.btnNewBill.TabIndex = 8;
+            this.btnNewBill.Text = "Tạo hóa đơn mới";
+            this.btnNewBill.UseVisualStyleBackColor = false;
+            this.btnNewBill.Click += new System.EventHandler(this.btnNewBill_Click);
             // 
             // btnClearFilter
             // 
@@ -528,6 +543,7 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Button btnClearFilter;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnNewBill;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmViewDetail;

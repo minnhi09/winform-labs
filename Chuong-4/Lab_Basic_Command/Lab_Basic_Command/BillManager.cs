@@ -311,6 +311,23 @@ namespace Lab_Basic_Command
 
             MessageBox.Show("Chức năng xuất báo cáo đang được phát triển", "Thông báo");
         }
+
+        private void btnNewBill_Click(object sender, EventArgs e)
+        {
+            // Hiển thị form chọn bàn để tạo hóa đơn mới
+            TableSelectionForm tableSelectionForm = new TableSelectionForm();
+            if (tableSelectionForm.ShowDialog() == DialogResult.OK)
+            {
+                int selectedTableID = tableSelectionForm.SelectedTableID;
+                
+                // Mở form chi tiết hóa đơn với hóa đơn mới
+                BillDetailForm detailForm = new BillDetailForm(selectedTableID, true); // true = tạo hóa đơn mới
+                detailForm.ShowDialog();
+
+                // Reload danh sách sau khi đóng form
+                btnLoad.PerformClick();
+            }
+        }
     }
 
     // Helper class cho ComboBox

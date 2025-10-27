@@ -116,22 +116,22 @@ namespace Lab_Basic_Command
             // dtpCheckOut
             // 
             this.dtpCheckOut.CustomFormat = "dd/MM/yyyy HH:mm:ss";
-            this.dtpCheckOut.Enabled = false;
             this.dtpCheckOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpCheckOut.Location = new System.Drawing.Point(840, 43);
             this.dtpCheckOut.Name = "dtpCheckOut";
             this.dtpCheckOut.Size = new System.Drawing.Size(200, 22);
             this.dtpCheckOut.TabIndex = 4;
+            this.dtpCheckOut.ValueChanged += new System.EventHandler(this.dtpCheckOut_ValueChanged);
             // 
             // dtpCheckIn
             // 
             this.dtpCheckIn.CustomFormat = "dd/MM/yyyy HH:mm:ss";
-            this.dtpCheckIn.Enabled = false;
             this.dtpCheckIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpCheckIn.Location = new System.Drawing.Point(840, 12);
             this.dtpCheckIn.Name = "dtpCheckIn";
             this.dtpCheckIn.Size = new System.Drawing.Size(200, 22);
             this.dtpCheckIn.TabIndex = 3;
+            this.dtpCheckIn.ValueChanged += new System.EventHandler(this.dtpCheckIn_ValueChanged);
             // 
             // txtAccount
             // 

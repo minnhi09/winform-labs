@@ -506,6 +506,8 @@ namespace Lab_Basic_Command
 
         private void DisableEditingControls()
         {
+            dtpCheckIn.Enabled = false;
+            dtpCheckOut.Enabled = false;
             cboFood.Enabled = false;
             txtQuantity.Enabled = false;
             txtDetailNotes.Enabled = false;
@@ -515,6 +517,65 @@ namespace Lab_Basic_Command
             btnUpdateFood.Enabled = false;
             btnDeleteFood.Enabled = false;
             btnPayment.Enabled = false;
+        }
+
+        private void dtpCheckIn_ValueChanged(object sender, EventArgs e)
+        {
+            // Chỉ cập nhật nếu hóa đơn chưa thanh toán
+            if (cboStatus.SelectedIndex == 0)
+            {
+                UpdateBillDateTime();
+            }
+        }
+
+        private void dtpCheckOut_ValueChanged(object sender, EventArgs e)
+        {
+            // Chỉ cập nhật nếu hóa đơn chưa thanh toán
+            if (cboStatus.SelectedIndex == 0)
+            {
+                UpdateBillDateTime();
+            }
+        }
+
+        private void UpdateBillDateTime()
+        {
+            SqlConnection conn = new SqlConnection(CONNECTION_STRING);
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"
+                UPDATE Bill
+                SET DateCheckIn = @checkIn, 
+                    DateCheckOut = @checkOut
+                WHERE ID = @billID
+            ";
+
+            cmd.Parameters.AddWithValue("@billID", billID);
+            cmd.Parameters.AddWithValue("@checkIn", dtpCheckIn.Value);
+            
+            // Nếu chưa có giờ checkout, để NULL
+            if (dtpCheckOut.Value.Date == DateTime.Now.Date && dtpCheckOut.Value.TimeOfDay == TimeSpan.Zero)
+            {
+                cmd.Parameters.AddWithValue("@checkOut", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@checkOut", dtpCheckOut.Value);
+            }
+
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật thời gian: " + ex.Message, "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         // Helper class
