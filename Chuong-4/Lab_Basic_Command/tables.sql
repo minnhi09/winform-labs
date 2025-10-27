@@ -1,6 +1,24 @@
 USE [RestaurantManagement]
 GO
 
+-- Drop tables in reverse order to avoid foreign key constraint errors
+IF OBJECT_ID('dbo.BillDetail', 'U') IS NOT NULL DROP TABLE [dbo].[BillDetail]
+GO
+IF OBJECT_ID('dbo.Bill', 'U') IS NOT NULL DROP TABLE [dbo].[Bill]
+GO
+IF OBJECT_ID('dbo.AccountRole', 'U') IS NOT NULL DROP TABLE [dbo].[AccountRole]
+GO
+IF OBJECT_ID('dbo.Role', 'U') IS NOT NULL DROP TABLE [dbo].[Role]
+GO
+IF OBJECT_ID('dbo.Account', 'U') IS NOT NULL DROP TABLE [dbo].[Account]
+GO
+IF OBJECT_ID('dbo.Table', 'U') IS NOT NULL DROP TABLE [dbo].[Table]
+GO
+IF OBJECT_ID('dbo.Food', 'U') IS NOT NULL DROP TABLE [dbo].[Food]
+GO
+IF OBJECT_ID('dbo.Category', 'U') IS NOT NULL DROP TABLE [dbo].[Category]
+GO
+
 CREATE TABLE [dbo].[Category](
 	[ID] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Name] [nvarchar](100) NOT NULL,
