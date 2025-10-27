@@ -26,6 +26,10 @@ namespace Lab_Basic_Command
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            // Đặt giá trị mặc định cho tài khoản admin
+            txtUsername.Text = "admin";
+            txtPassword.Text = "admin123";
+            
             // Set focus vào textbox username
             txtUsername.Focus();
             
