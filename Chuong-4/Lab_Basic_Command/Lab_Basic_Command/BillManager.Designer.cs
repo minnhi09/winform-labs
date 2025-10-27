@@ -64,9 +64,17 @@ namespace Lab_Basic_Command
             this.chNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnViewDetail = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblStatTotalAmount = new System.Windows.Forms.Label();
+            this.lblStatDiscount = new System.Windows.Forms.Label();
+            this.lblStatFinalAmount = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -142,7 +150,7 @@ namespace Lab_Basic_Command
             this.chkFilterDate.AutoSize = true;
             this.chkFilterDate.Location = new System.Drawing.Point(583, 60);
             this.chkFilterDate.Name = "chkFilterDate";
-            this.chkFilterDate.Size = new System.Drawing.Size(94, 20);
+            this.chkFilterDate.Size = new System.Drawing.Size(97, 20);
             this.chkFilterDate.TabIndex = 2;
             this.chkFilterDate.Text = "Lọc ngày từ";
             this.chkFilterDate.UseVisualStyleBackColor = true;
@@ -175,7 +183,7 @@ namespace Lab_Basic_Command
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(839, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 16);
+            this.label3.Size = new System.Drawing.Size(31, 16);
             this.label3.TabIndex = 0;
             this.label3.Text = "Đến";
             // 
@@ -193,7 +201,7 @@ namespace Lab_Basic_Command
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(280, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 16);
+            this.label1.Size = new System.Drawing.Size(34, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bàn:";
             // 
@@ -277,12 +285,12 @@ namespace Lab_Basic_Command
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmViewDetail});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 28);
             // 
             // tsmViewDetail
             // 
             this.tsmViewDetail.Name = "tsmViewDetail";
-            this.tsmViewDetail.Size = new System.Drawing.Size(152, 24);
+            this.tsmViewDetail.Size = new System.Drawing.Size(157, 24);
             this.tsmViewDetail.Text = "Xem chi tiết";
             this.tsmViewDetail.Click += new System.EventHandler(this.tsmViewDetail_Click);
             // 
@@ -290,9 +298,9 @@ namespace Lab_Basic_Command
             // 
             this.groupBox2.Controls.Add(this.lblTotalAmount);
             this.groupBox2.Controls.Add(this.lvBillDetails);
-            this.groupBox2.Location = new System.Drawing.Point(12, 474);
+            this.groupBox2.Location = new System.Drawing.Point(12, 525);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1326, 250);
+            this.groupBox2.Size = new System.Drawing.Size(1326, 200);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chi tiết hóa đơn";
@@ -302,9 +310,9 @@ namespace Lab_Basic_Command
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalAmount.ForeColor = System.Drawing.Color.Red;
-            this.lblTotalAmount.Location = new System.Drawing.Point(1050, 218);
+            this.lblTotalAmount.Location = new System.Drawing.Point(1050, 168);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(95, 20);
+            this.lblTotalAmount.Size = new System.Drawing.Size(93, 20);
             this.lblTotalAmount.TabIndex = 1;
             this.lblTotalAmount.Text = "Tổng tiền:";
             // 
@@ -322,7 +330,7 @@ namespace Lab_Basic_Command
             this.lvBillDetails.HideSelection = false;
             this.lvBillDetails.Location = new System.Drawing.Point(16, 25);
             this.lvBillDetails.Name = "lvBillDetails";
-            this.lvBillDetails.Size = new System.Drawing.Size(1294, 180);
+            this.lvBillDetails.Size = new System.Drawing.Size(1294, 130);
             this.lvBillDetails.TabIndex = 0;
             this.lvBillDetails.UseCompatibleStateImageBehavior = false;
             this.lvBillDetails.View = System.Windows.Forms.View.Details;
@@ -377,15 +385,94 @@ namespace Lab_Basic_Command
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 118);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(146, 18);
+            this.label4.Size = new System.Drawing.Size(154, 18);
             this.label4.TabIndex = 4;
             this.label4.Text = "Danh sách hóa đơn";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.lblStatTotalAmount);
+            this.groupBox3.Controls.Add(this.lblStatDiscount);
+            this.groupBox3.Controls.Add(this.lblStatFinalAmount);
+            this.groupBox3.Location = new System.Drawing.Point(12, 449);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1200, 65);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Thống kê";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(20, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 18);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Tổng tiền (chưa giảm giá):";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(420, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(132, 18);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Tổng tiền giảm giá:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(820, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 20);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Thực thu:";
+            // 
+            // lblStatTotalAmount
+            // 
+            this.lblStatTotalAmount.AutoSize = true;
+            this.lblStatTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatTotalAmount.ForeColor = System.Drawing.Color.Blue;
+            this.lblStatTotalAmount.Location = new System.Drawing.Point(228, 28);
+            this.lblStatTotalAmount.Name = "lblStatTotalAmount";
+            this.lblStatTotalAmount.Size = new System.Drawing.Size(17, 18);
+            this.lblStatTotalAmount.TabIndex = 1;
+            this.lblStatTotalAmount.Text = "0";
+            // 
+            // lblStatDiscount
+            // 
+            this.lblStatDiscount.AutoSize = true;
+            this.lblStatDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatDiscount.ForeColor = System.Drawing.Color.Orange;
+            this.lblStatDiscount.Location = new System.Drawing.Point(570, 28);
+            this.lblStatDiscount.Name = "lblStatDiscount";
+            this.lblStatDiscount.Size = new System.Drawing.Size(17, 18);
+            this.lblStatDiscount.TabIndex = 3;
+            this.lblStatDiscount.Text = "0";
+            // 
+            // lblStatFinalAmount
+            // 
+            this.lblStatFinalAmount.AutoSize = true;
+            this.lblStatFinalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatFinalAmount.ForeColor = System.Drawing.Color.Red;
+            this.lblStatFinalAmount.Location = new System.Drawing.Point(930, 26);
+            this.lblStatFinalAmount.Name = "lblStatFinalAmount";
+            this.lblStatFinalAmount.Size = new System.Drawing.Size(24, 25);
+            this.lblStatFinalAmount.TabIndex = 5;
+            this.lblStatFinalAmount.Text = "0";
             // 
             // BillManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 736);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnViewDetail);
             this.Controls.Add(this.groupBox2);
@@ -400,6 +487,8 @@ namespace Lab_Basic_Command
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,5 +531,12 @@ namespace Lab_Basic_Command
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmViewDetail;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblStatTotalAmount;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblStatDiscount;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblStatFinalAmount;
     }
 }

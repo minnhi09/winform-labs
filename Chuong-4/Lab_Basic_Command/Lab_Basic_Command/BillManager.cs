@@ -141,6 +141,10 @@ namespace Lab_Basic_Command
         {
             lvBills.Items.Clear();
 
+            decimal totalAmount = 0;
+            decimal totalDiscount = 0;
+            decimal finalAmount = 0;
+
             while (reader.Read())
             {
                 ListViewItem item = new ListViewItem(reader["ID"].ToString());
@@ -151,12 +155,33 @@ namespace Lab_Basic_Command
                     ? Convert.ToDateTime(reader["DateCheckOut"]).ToString("dd/MM/yyyy HH:mm") 
                     : "");
                 item.SubItems.Add(reader["StatusText"].ToString());
-                item.SubItems.Add(Convert.ToDecimal(reader["TotalAmount"]).ToString("N0"));
-                item.SubItems.Add(reader["Discount"].ToString());
-                item.SubItems.Add(Convert.ToDecimal(reader["FinalAmount"]).ToString("N0"));
+                
+                decimal billTotal = Convert.ToDecimal(reader["TotalAmount"]);
+                decimal discount = Convert.ToDecimal(reader["Discount"]);
+                decimal billFinal = Convert.ToDecimal(reader["FinalAmount"]);
+                
+                item.SubItems.Add(billTotal.ToString("N0"));
+                item.SubItems.Add(discount.ToString());
+                item.SubItems.Add(billFinal.ToString("N0"));
+
+                // Tính tổng
+                totalAmount += billTotal;
+                decimal discountAmount = billTotal * (discount / 100);
+                totalDiscount += discountAmount;
+                finalAmount += billFinal;
 
                 lvBills.Items.Add(item);
             }
+
+            // Hiển thị thống kê
+            UpdateStatistics(totalAmount, totalDiscount, finalAmount);
+        }
+
+        private void UpdateStatistics(decimal totalAmount, decimal totalDiscount, decimal finalAmount)
+        {
+            lblStatTotalAmount.Text = totalAmount.ToString("N0") + " VNĐ";
+            lblStatDiscount.Text = totalDiscount.ToString("N0") + " VNĐ";
+            lblStatFinalAmount.Text = finalAmount.ToString("N0") + " VNĐ";
         }
 
         private void lvBills_Click(object sender, EventArgs e)
