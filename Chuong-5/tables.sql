@@ -1,5 +1,5 @@
 -- =============================================
--- Script: Create Database and Tables for Lab_Advanced_Command
+-- Script: Create Database and Tables for Chuong_5_Lab_Advanced_Command
 -- Description: Database structure for Food Management System
 -- Date: October 27, 2025
 -- =============================================
@@ -10,24 +10,24 @@
 USE master;
 GO
 
-IF EXISTS (SELECT * FROM sys.databases WHERE name = 'Lab_Advanced_Command')
+IF EXISTS (SELECT * FROM sys.databases WHERE name = 'Chuong_5_Lab_Advanced_Command')
 BEGIN
     -- Disconnect all users from the database
-    ALTER DATABASE Lab_Advanced_Command SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE Lab_Advanced_Command;
-    PRINT 'Existing database Lab_Advanced_Command has been dropped.';
+    ALTER DATABASE Chuong_5_Lab_Advanced_Command SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE Chuong_5_Lab_Advanced_Command;
+    PRINT 'Existing database Chuong_5_Lab_Advanced_Command has been dropped.';
 END
 GO
 
 -- =============================================
 -- Create new database
 -- =============================================
-CREATE DATABASE Lab_Advanced_Command;
-PRINT 'Database Lab_Advanced_Command created successfully.';
+CREATE DATABASE Chuong_5_Lab_Advanced_Command;
+PRINT 'Database Chuong_5_Lab_Advanced_Command created successfully.';
 GO
 
 -- Use the database
-USE Lab_Advanced_Command;
+USE Chuong_5_Lab_Advanced_Command;
 GO
 
 -- =============================================
