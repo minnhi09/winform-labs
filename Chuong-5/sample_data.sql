@@ -1,11 +1,11 @@
 -- =============================================
--- Script: Insert Sample Data for Lab_Advanced_Command
+-- Script: Insert Sample Data for Chuong_5_Lab_Advanced_Command
 -- Description: Sample data for Food Management System
 -- Date: October 27, 2025
 -- Note: Run this script AFTER running tables.sql
 -- =============================================
 
-USE Lab_Advanced_Command;
+USE Chuong_5_Lab_Advanced_Command;
 GO
 
 -- =============================================
