@@ -221,6 +221,7 @@ namespace Lab_Basic_Command
             this.lvBills.UseCompatibleStateImageBehavior = false;
             this.lvBills.View = System.Windows.Forms.View.Details;
             this.lvBills.Click += new System.EventHandler(this.lvBills_Click);
+            this.lvBills.DoubleClick += new System.EventHandler(this.lvBills_DoubleClick);
             // 
             // chID
             // 

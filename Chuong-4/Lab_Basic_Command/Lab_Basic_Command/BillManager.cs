@@ -254,6 +254,12 @@ namespace Lab_Basic_Command
             btnViewDetail.PerformClick();
         }
 
+        private void lvBills_DoubleClick(object sender, EventArgs e)
+        {
+            // Mở form chi tiết khi double click vào hóa đơn
+            btnViewDetail.PerformClick();
+        }
+
         private void chkFilterDate_CheckedChanged(object sender, EventArgs e)
         {
             dtpFrom.Enabled = chkFilterDate.Checked;
