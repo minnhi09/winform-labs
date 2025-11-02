@@ -64,7 +64,73 @@ namespace Lab_Advanced_Command
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // TODO: Add new food logic
+            try
+            {
+                // 1. Cấu hình kết nối
+                SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+
+                // 2. Cấu hình stored procedure
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "InsertFood";
+
+                // 3. Thêm parameters
+                SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+                idParameter.Direction = ParameterDirection.Output;
+                sqlCommand.Parameters.Add(idParameter);
+
+                sqlCommand.Parameters.AddWithValue("@Name", txtFoodName.Text);
+                sqlCommand.Parameters.AddWithValue("@Unit", txtUnit.Text);
+                sqlCommand.Parameters.AddWithValue("@FoodCategoryID", cboCategory.SelectedValue);
+                sqlCommand.Parameters.AddWithValue("@Price", (int)numPrice.Value);
+                sqlCommand.Parameters.AddWithValue("@Notes", txtNotes.Text);
+
+                // 4. Thực hiện kết nối và thực thi
+                sqlConnection.Open();
+                int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                // 5. Lấy ID mới được tạo
+                int newFoodId = Convert.ToInt32(idParameter.Value);
+
+                // 6. Đóng kết nối
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+
+                // 7. Thông báo kết quả
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show($"Thêm món ăn thành công!\nMã món ăn: {newFoodId}", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // Hiển thị ID vừa tạo
+                    txtFoodId.Text = newFoodId.ToString();
+                    
+                    // Reset form để tiếp tục thêm mới
+                    DialogResult result = MessageBox.Show("Bạn có muốn thêm món ăn khác không?", 
+                        "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    
+                    if (result == DialogResult.Yes)
+                    {
+                        ResetText();
+                        txtFoodName.Focus();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Thêm món ăn thất bại!", "Lỗi", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
