@@ -447,3 +447,44 @@ END
 GO
 
 PRINT 'Created 20 stored procedures for Orders Management successfully!';
+
+-- 21. Advanced filter: Get bills by date range, status, and search text
+GO
+CREATE OR ALTER PROCEDURE GetBillsAdvancedFilter
+    @StartDate DATETIME = NULL,
+    @EndDate DATETIME = NULL,
+    @Status NVARCHAR(50) = NULL,
+    @SearchText NVARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        b.ID,
+        b.AccountID,
+        a.Username,
+        a.FullName AS AccountName,
+        b.DateCheckIn,
+        b.DateCheckOut,
+        b.TotalAmount,
+        b.Discount,
+        b.FinalAmount,
+        b.Status
+    FROM Bills b
+    INNER JOIN Accounts a ON b.AccountID = a.ID
+    WHERE 
+        -- Date range filter
+        (@StartDate IS NULL OR b.DateCheckIn >= @StartDate)
+        AND (@EndDate IS NULL OR b.DateCheckIn <= @EndDate)
+        -- Status filter
+        AND (@Status IS NULL OR @Status = N'Tất cả' OR b.Status = @Status)
+        -- Search filter
+        AND (
+            @SearchText IS NULL 
+            OR @SearchText = '' 
+            OR a.FullName LIKE N'%' + @SearchText + '%'
+            OR a.Username LIKE N'%' + @SearchText + '%'
+        )
+    ORDER BY b.DateCheckIn DESC;
+END
+GO
+
+PRINT 'Created 21 stored procedures for Orders Management successfully!';

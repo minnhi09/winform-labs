@@ -24,7 +24,15 @@ namespace Lab_Advanced_Command
         {
             LoadBills();
             LoadStatusComboBox();
+            InitializeDateFilters();
             ResetForm();
+        }
+
+        private void InitializeDateFilters()
+        {
+            // Set default date range (last 30 days)
+            dtpStartDate.Value = DateTime.Now.AddDays(-30);
+            dtpEndDate.Value = DateTime.Now;
         }
 
         private void LoadStatusComboBox()
@@ -452,6 +460,52 @@ namespace Lab_Advanced_Command
             catch
             {
                 txtFinalAmount.Text = "0";
+            }
+        }
+
+        private void btnFilterDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime startDate = dtpStartDate.Value.Date;
+                DateTime endDate = dtpEndDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                if (startDate > endDate)
+                {
+                    MessageBox.Show("Ngày bắt đầu không thể lớn hơn ngày kết thúc!",
+                        "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+
+                // Use stored procedure for date range filtering
+                sqlCommand.CommandText = "GetBillsByDateRange";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@StartDate", startDate);
+                sqlCommand.Parameters.AddWithValue("@EndDate", endDate);
+
+                sqlConnection.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                billsTable = new DataTable();
+                sqlDataAdapter.Fill(billsTable);
+
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+
+                dgvBills.AutoGenerateColumns = false;
+                dgvBills.DataSource = billsTable;
+
+                UpdateStatistics();
+
+                MessageBox.Show($"Đã lọc {billsTable.Rows.Count} hóa đơn từ {startDate:dd/MM/yyyy} đến {endDate:dd/MM/yyyy}",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lọc theo ngày: {ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

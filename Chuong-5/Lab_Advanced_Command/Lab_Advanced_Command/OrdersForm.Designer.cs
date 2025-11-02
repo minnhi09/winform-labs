@@ -64,6 +64,11 @@ namespace Lab_Advanced_Command
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelSearch = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnFilterDate = new System.Windows.Forms.Button();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.lblEndDate = new System.Windows.Forms.Label();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.lblStartDate = new System.Windows.Forms.Label();
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.lblFilterStatus = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -381,7 +386,7 @@ namespace Lab_Advanced_Command
             this.colFinalAmount,
             this.colStatus});
             this.dgvBills.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBills.Location = new System.Drawing.Point(3, 73);
+            this.dgvBills.Location = new System.Drawing.Point(3, 107);
             this.dgvBills.MultiSelect = false;
             this.dgvBills.Name = "dgvBills";
             this.dgvBills.ReadOnly = true;
@@ -467,6 +472,11 @@ namespace Lab_Advanced_Command
             // panelSearch
             // 
             this.panelSearch.Controls.Add(this.btnRefresh);
+            this.panelSearch.Controls.Add(this.btnFilterDate);
+            this.panelSearch.Controls.Add(this.dtpEndDate);
+            this.panelSearch.Controls.Add(this.lblEndDate);
+            this.panelSearch.Controls.Add(this.dtpStartDate);
+            this.panelSearch.Controls.Add(this.lblStartDate);
             this.panelSearch.Controls.Add(this.cboStatus);
             this.panelSearch.Controls.Add(this.lblFilterStatus);
             this.panelSearch.Controls.Add(this.txtSearch);
@@ -474,7 +484,7 @@ namespace Lab_Advanced_Command
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSearch.Location = new System.Drawing.Point(3, 22);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(954, 51);
+            this.panelSearch.Size = new System.Drawing.Size(954, 85);
             this.panelSearch.TabIndex = 0;
             // 
             // btnRefresh
@@ -491,6 +501,61 @@ namespace Lab_Advanced_Command
             this.btnRefresh.Text = "🔄 Làm mới";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnFilterDate
+            // 
+            this.btnFilterDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.btnFilterDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFilterDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilterDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFilterDate.ForeColor = System.Drawing.Color.White;
+            this.btnFilterDate.Location = new System.Drawing.Point(740, 47);
+            this.btnFilterDate.Name = "btnFilterDate";
+            this.btnFilterDate.Size = new System.Drawing.Size(90, 28);
+            this.btnFilterDate.TabIndex = 9;
+            this.btnFilterDate.Text = "🔍 Lọc";
+            this.btnFilterDate.UseVisualStyleBackColor = false;
+            this.btnFilterDate.Click += new System.EventHandler(this.btnFilterDate_Click);
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEndDate.Location = new System.Drawing.Point(580, 49);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(140, 23);
+            this.dtpEndDate.TabIndex = 8;
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.AutoSize = true;
+            this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEndDate.Location = new System.Drawing.Point(490, 52);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(82, 15);
+            this.lblEndDate.TabIndex = 7;
+            this.lblEndDate.Text = "Đến ngày:";
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(290, 49);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(140, 23);
+            this.dtpStartDate.TabIndex = 6;
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblStartDate.Location = new System.Drawing.Point(10, 52);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(270, 15);
+            this.lblStartDate.TabIndex = 5;
+            this.lblStartDate.Text = "📅 Lọc theo ngày (từ ngày - đến ngày):         Từ ngày:";
             // 
             // cboStatus
             // 
@@ -764,6 +829,11 @@ namespace Lab_Advanced_Command
         private System.Windows.Forms.ComboBox cboStatus;
         private System.Windows.Forms.Label lblFilterStatus;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnFilterDate;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.Label lblEndDate;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.Label lblStartDate;
         private System.Windows.Forms.GroupBox grpBillDetails;
         private System.Windows.Forms.DataGridView dgvBillDetails;
         private System.Windows.Forms.Label lblDetailCount;
