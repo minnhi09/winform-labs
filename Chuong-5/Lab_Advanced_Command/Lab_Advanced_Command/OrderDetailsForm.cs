@@ -30,22 +30,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    SELECT 
-                        b.ID,
-                        b.AccountID,
-                        a.Username,
-                        a.FullName AS AccountName,
-                        b.DateCheckIn,
-                        b.DateCheckOut,
-                        b.TotalAmount,
-                        b.Discount,
-                        b.FinalAmount,
-                        b.Status
-                    FROM Bills b
-                    INNER JOIN Accounts a ON b.AccountID = a.ID
-                    WHERE b.ID = @BillID;";
-
+                // Use stored procedure instead of raw SQL
+                sqlCommand.CommandText = "GetBillByID";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@BillID", billId);
 
                 sqlConnection.Open();
@@ -109,21 +96,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    SELECT 
-                        bd.ID,
-                        f.Name AS FoodName,
-                        c.Name AS CategoryName,
-                        f.Unit,
-                        bd.Quantity,
-                        bd.Price,
-                        bd.TotalPrice
-                    FROM BillDetails bd
-                    INNER JOIN Foods f ON bd.FoodID = f.ID
-                    INNER JOIN Categories c ON f.FoodCategoryID = c.ID
-                    WHERE bd.BillID = @BillID
-                    ORDER BY c.Name, f.Name;";
-
+                // Use stored procedure instead of raw SQL
+                sqlCommand.CommandText = "GetBillDetailsWithCategory";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@BillID", billId);
 
                 sqlConnection.Open();

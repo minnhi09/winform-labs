@@ -43,21 +43,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    SELECT 
-                        b.ID,
-                        b.AccountID,
-                        a.Username,
-                        a.FullName AS AccountName,
-                        b.DateCheckIn,
-                        b.DateCheckOut,
-                        b.TotalAmount,
-                        b.Discount,
-                        b.FinalAmount,
-                        b.Status
-                    FROM Bills b
-                    INNER JOIN Accounts a ON b.AccountID = a.ID
-                    ORDER BY b.DateCheckIn DESC;";
+                // Use stored procedure instead of raw SQL
+                sqlCommand.CommandText = "GetAllBills";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlConnection.Open();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
@@ -86,21 +74,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    SELECT 
-                        bd.ID,
-                        bd.BillID,
-                        bd.FoodID,
-                        f.Name AS FoodName,
-                        f.Unit,
-                        bd.Quantity,
-                        bd.Price,
-                        bd.TotalPrice
-                    FROM BillDetails bd
-                    INNER JOIN Foods f ON bd.FoodID = f.ID
-                    WHERE bd.BillID = @BillID
-                    ORDER BY f.Name;";
-
+                // Use stored procedure instead of raw SQL
+                sqlCommand.CommandText = "GetBillDetails";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@BillID", billId);
 
                 sqlConnection.Open();
@@ -292,13 +268,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    UPDATE Bills
-                    SET DateCheckOut = @DateCheckOut,
-                        Discount = @Discount,
-                        FinalAmount = @FinalAmount,
-                        Status = @Status
-                    WHERE ID = @ID;";
+                // Use stored procedure instead of raw SQL
+                sqlCommand.CommandText = "UpdateBill";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtBillId.Text));
                 sqlCommand.Parameters.AddWithValue("@DateCheckOut", dtpCheckOut.Value);
@@ -312,8 +284,15 @@ namespace Lab_Advanced_Command
                 sqlCommand.Parameters.AddWithValue("@Status", txtStatus.Text);
 
                 sqlConnection.Open();
-                int rowsAffected = sqlCommand.ExecuteNonQuery();
-
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                
+                int rowsAffected = 0;
+                if (reader.Read())
+                {
+                    rowsAffected = Convert.ToInt32(reader["RowsAffected"]);
+                }
+                
+                reader.Close();
                 sqlConnection.Close();
                 sqlCommand.Dispose();
 
@@ -360,16 +339,27 @@ namespace Lab_Advanced_Command
                     SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                     SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                    sqlCommand.CommandText = "DELETE FROM Bills WHERE ID = @ID;";
+                    // Use stored procedure instead of raw SQL
+                    sqlCommand.CommandText = "DeleteBill";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtBillId.Text));
 
                     sqlConnection.Open();
-                    int rowsAffected = sqlCommand.ExecuteNonQuery();
-
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    
+                    int success = 0;
+                    string message = "";
+                    if (reader.Read())
+                    {
+                        success = Convert.ToInt32(reader["Success"]);
+                        message = reader["Message"].ToString() ?? "";
+                    }
+                    
+                    reader.Close();
                     sqlConnection.Close();
                     sqlCommand.Dispose();
 
-                    if (rowsAffected > 0)
+                    if (success > 0)
                     {
                         MessageBox.Show("Xóa hóa đơn thành công!",
                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
