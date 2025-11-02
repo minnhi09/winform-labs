@@ -235,6 +235,37 @@ namespace Lab_Advanced_Command
             }
         }
 
+        private void dgvBills_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ignore header row clicks
+            if (e.RowIndex < 0)
+                return;
+
+            if (dgvBills.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    DataGridViewRow selectedRow = dgvBills.SelectedRows[0];
+                    string billIdStr = GetCellValue(selectedRow, "colBillID");
+
+                    if (!string.IsNullOrEmpty(billIdStr) && int.TryParse(billIdStr, out int billId))
+                    {
+                        // Open OrderDetailsForm with the selected bill ID
+                        OrderDetailsForm detailsForm = new OrderDetailsForm(billId);
+                        detailsForm.ShowDialog();
+
+                        // Refresh the bills list after closing the details form (in case any changes were made)
+                        LoadBills();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi mở chi tiết hóa đơn: {ex.Message}",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void btnViewDetails_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtBillId.Text))

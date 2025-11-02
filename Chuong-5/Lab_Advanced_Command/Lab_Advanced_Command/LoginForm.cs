@@ -17,6 +17,9 @@ namespace Lab_Advanced_Command
         public LoginForm()
         {
             InitializeComponent();
+
+            txtUsername.Text = "admin";
+            txtPassword.Text = "123456";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

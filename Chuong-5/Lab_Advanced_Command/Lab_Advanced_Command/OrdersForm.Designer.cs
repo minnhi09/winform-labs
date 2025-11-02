@@ -389,6 +389,7 @@ namespace Lab_Advanced_Command
             this.dgvBills.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBills.Size = new System.Drawing.Size(954, 284);
             this.dgvBills.TabIndex = 1;
+            this.dgvBills.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBills_CellDoubleClick);
             this.dgvBills.SelectionChanged += new System.EventHandler(this.dgvBills_SelectionChanged);
             // 
             // colBillID
