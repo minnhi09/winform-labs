@@ -32,6 +32,7 @@ namespace Lab_Advanced_Command
             lblSubtitle = new Label();
             btnFoodManagement = new Button();
             btnAccountManagement = new Button();
+            btnRoleManagement = new Button();
             btnExit = new Button();
             panelButtons = new Panel();
             panelButtons.SuspendLayout();
@@ -65,10 +66,11 @@ namespace Lab_Advanced_Command
             // 
             panelButtons.Controls.Add(btnFoodManagement);
             panelButtons.Controls.Add(btnAccountManagement);
+            panelButtons.Controls.Add(btnRoleManagement);
             panelButtons.Controls.Add(btnExit);
             panelButtons.Location = new Point(100, 150);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(400, 280);
+            panelButtons.Size = new Size(400, 350);
             panelButtons.TabIndex = 2;
             // 
             // btnFoodManagement
@@ -107,6 +109,24 @@ namespace Lab_Advanced_Command
             btnAccountManagement.MouseEnter += (s, e) => btnAccountManagement.BackColor = Color.FromArgb(41, 128, 185);
             btnAccountManagement.MouseLeave += (s, e) => btnAccountManagement.BackColor = Color.FromArgb(52, 152, 219);
             // 
+            // btnRoleManagement
+            // 
+            btnRoleManagement.BackColor = Color.FromArgb(155, 89, 182);
+            btnRoleManagement.Cursor = Cursors.Hand;
+            btnRoleManagement.FlatAppearance.BorderSize = 0;
+            btnRoleManagement.FlatStyle = FlatStyle.Flat;
+            btnRoleManagement.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnRoleManagement.ForeColor = Color.White;
+            btnRoleManagement.Location = new Point(50, 200);
+            btnRoleManagement.Name = "btnRoleManagement";
+            btnRoleManagement.Size = new Size(300, 70);
+            btnRoleManagement.TabIndex = 2;
+            btnRoleManagement.Text = "👥 Quản lý vai trò";
+            btnRoleManagement.UseVisualStyleBackColor = false;
+            btnRoleManagement.Click += btnRoleManagement_Click;
+            btnRoleManagement.MouseEnter += (s, e) => btnRoleManagement.BackColor = Color.FromArgb(142, 68, 173);
+            btnRoleManagement.MouseLeave += (s, e) => btnRoleManagement.BackColor = Color.FromArgb(155, 89, 182);
+            // 
             // btnExit
             // 
             btnExit.BackColor = Color.FromArgb(231, 76, 60);
@@ -115,7 +135,7 @@ namespace Lab_Advanced_Command
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             btnExit.ForeColor = Color.White;
-            btnExit.Location = new Point(50, 200);
+            btnExit.Location = new Point(50, 290);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(300, 70);
             btnExit.TabIndex = 2;
@@ -130,7 +150,7 @@ namespace Lab_Advanced_Command
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(600, 450);
+            ClientSize = new Size(600, 520);
             Controls.Add(panelButtons);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
@@ -149,6 +169,7 @@ namespace Lab_Advanced_Command
         private Label lblSubtitle;
         private Button btnFoodManagement;
         private Button btnAccountManagement;
+        private Button btnRoleManagement;
         private Button btnExit;
         private Panel panelButtons;
     }

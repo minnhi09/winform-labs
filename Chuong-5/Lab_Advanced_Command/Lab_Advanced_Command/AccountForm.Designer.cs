@@ -57,6 +57,7 @@ namespace Lab_Advanced_Command
             btnUpdate = new Button();
             btnDelete = new Button();
             btnClear = new Button();
+            btnManageRoles = new Button();
             groupBoxInfo.SuspendLayout();
             groupBoxList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
@@ -331,6 +332,7 @@ namespace Lab_Advanced_Command
             panelButtons.Controls.Add(btnUpdate);
             panelButtons.Controls.Add(btnDelete);
             panelButtons.Controls.Add(btnClear);
+            panelButtons.Controls.Add(btnManageRoles);
             panelButtons.Location = new Point(14, 415);
             panelButtons.Name = "panelButtons";
             panelButtons.Size = new Size(400, 145);
@@ -397,6 +399,21 @@ namespace Lab_Advanced_Command
             btnClear.UseVisualStyleBackColor = false;
             btnClear.Click += btnClear_Click;
             // 
+            // btnManageRoles
+            // 
+            btnManageRoles.BackColor = Color.FromArgb(52, 152, 219);
+            btnManageRoles.FlatAppearance.BorderSize = 0;
+            btnManageRoles.FlatStyle = FlatStyle.Flat;
+            btnManageRoles.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnManageRoles.ForeColor = Color.White;
+            btnManageRoles.Location = new Point(115, 135);
+            btnManageRoles.Name = "btnManageRoles";
+            btnManageRoles.Size = new Size(170, 40);
+            btnManageRoles.TabIndex = 4;
+            btnManageRoles.Text = "👥 Quản lý vai trò";
+            btnManageRoles.UseVisualStyleBackColor = false;
+            btnManageRoles.Click += btnManageRoles_Click;
+            // 
             // AccountForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -444,6 +461,7 @@ namespace Lab_Advanced_Command
         private Button btnUpdate;
         private Button btnDelete;
         private Button btnClear;
+        private Button btnManageRoles;
         private Label lblSearch;
         private TextBox txtSearch;
         private Label lblTotalAccounts;

@@ -19,6 +19,12 @@ namespace Lab_Advanced_Command
             accountForm.ShowDialog(this);
         }
 
+        private void btnRoleManagement_Click(object sender, EventArgs e)
+        {
+            RoleForm roleForm = new RoleForm();
+            roleForm.ShowDialog(this);
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(

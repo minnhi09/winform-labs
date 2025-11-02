@@ -319,6 +319,12 @@ namespace Lab_Advanced_Command
             ResetForm();
         }
 
+        private void btnManageRoles_Click(object sender, EventArgs e)
+        {
+            RoleForm roleForm = new RoleForm();
+            roleForm.ShowDialog(this);
+        }
+
         /// <summary>
         /// Lấy giá trị cell an toàn, tránh lỗi khi cell không tồn tại hoặc giá trị null
         /// </summary>
