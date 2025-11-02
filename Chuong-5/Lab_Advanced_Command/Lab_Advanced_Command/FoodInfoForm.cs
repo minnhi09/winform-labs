@@ -80,7 +80,37 @@ namespace Lab_Advanced_Command
 
         private void btnAddNewCategory_Click(object sender, EventArgs e)
         {
-            // TODO: Open form to add new category
+            // Mở form thêm category mới
+            CategoryForm categoryForm = new CategoryForm();
+            
+            // Hiển thị form dạng dialog và chờ kết quả
+            DialogResult result = categoryForm.ShowDialog(this);
+            
+            // Nếu thêm thành công, reload lại danh sách categories
+            if (result == DialogResult.OK)
+            {
+                int selectedCategoryId = 0;
+                
+                // Lưu lại category đang chọn (nếu có)
+                if (cboCategory.SelectedValue != null)
+                {
+                    selectedCategoryId = Convert.ToInt32(cboCategory.SelectedValue);
+                }
+                
+                // Reload danh sách categories
+                InitValues();
+                
+                // Chọn lại category cũ hoặc category mới vừa thêm
+                if (selectedCategoryId > 0)
+                {
+                    cboCategory.SelectedValue = selectedCategoryId;
+                }
+                else
+                {
+                    // Chọn category cuối cùng (category mới thêm)
+                    cboCategory.SelectedIndex = cboCategory.Items.Count - 1;
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
