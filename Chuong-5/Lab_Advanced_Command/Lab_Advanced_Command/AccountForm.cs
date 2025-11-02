@@ -30,22 +30,14 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                // 2. Tạo câu lệnh SQL
-                sqlCommand.CommandText = @"
-                    SELECT 
-                        ID,
-                        Username,
-                        Password,
-                        FullName,
-                        IsActive,
-                        CreatedDate
-                    FROM Accounts
-                    ORDER BY CreatedDate DESC;";
+                // 2. Sử dụng stored procedure
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "GetAllAccounts";
 
                 // 3. Thực hiện kết nối
                 sqlConnection.Open();
 
-                // 4. Thực thi câu lệnh SQL và đổ dữ liệu vào DataTable
+                // 4. Thực thi stored procedure và đổ dữ liệu vào DataTable
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
                 accountTable = new DataTable();
                 sqlDataAdapter.Fill(accountTable);
@@ -142,13 +134,15 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                // 2. Tạo câu lệnh SQL với parameters
-                sqlCommand.CommandText = @"
-                    INSERT INTO Accounts (Username, Password, FullName, IsActive, CreatedDate)
-                    VALUES (@Username, @Password, @FullName, @IsActive, @CreatedDate);
-                    SELECT SCOPE_IDENTITY();";
+                // 2. Sử dụng stored procedure
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "InsertAccount";
 
                 // 3. Thêm parameters
+                SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+                idParameter.Direction = ParameterDirection.Output;
+                sqlCommand.Parameters.Add(idParameter);
+
                 sqlCommand.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
                 sqlCommand.Parameters.AddWithValue("@Password", txtPassword.Text);
                 sqlCommand.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
@@ -157,23 +151,26 @@ namespace Lab_Advanced_Command
 
                 // 4. Thực hiện kết nối và thực thi
                 sqlConnection.Open();
-                int newId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                sqlCommand.ExecuteNonQuery();
 
-                // 5. Đóng kết nối
+                // 5. Lấy ID mới được tạo
+                int newId = Convert.ToInt32(idParameter.Value);
+
+                // 6. Đóng kết nối
                 sqlConnection.Close();
                 sqlCommand.Dispose();
 
-                // 6. Thông báo kết quả
+                // 7. Thông báo kết quả
                 MessageBox.Show($"Thêm tài khoản thành công!\nMã tài khoản: {newId}\nTên đăng nhập: {txtUsername.Text}",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // 7. Reload danh sách và reset form
+                // 8. Reload danh sách và reset form
                 LoadAccounts();
                 ResetForm();
             }
             catch (SqlException sqlEx)
             {
-                if (sqlEx.Message.Contains("UNIQUE KEY"))
+                if (sqlEx.Message.Contains("Tên đăng nhập đã tồn tại") || sqlEx.Message.Contains("UNIQUE KEY"))
                 {
                     MessageBox.Show("Tên đăng nhập đã tồn tại! Vui lòng chọn tên khác.",
                         "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -210,13 +207,9 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                // 2. Tạo câu lệnh SQL với parameters
-                sqlCommand.CommandText = @"
-                    UPDATE Accounts
-                    SET Password = @Password,
-                        FullName = @FullName,
-                        IsActive = @IsActive
-                    WHERE ID = @ID;";
+                // 2. Sử dụng stored procedure
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "UpdateAccount";
 
                 // 3. Thêm parameters
                 sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtAccountId.Text));
@@ -248,6 +241,11 @@ namespace Lab_Advanced_Command
                         "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {sqlEx.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
@@ -278,8 +276,9 @@ namespace Lab_Advanced_Command
                     SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                     SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                    // 2. Tạo câu lệnh SQL
-                    sqlCommand.CommandText = "DELETE FROM Accounts WHERE ID = @ID;";
+                    // 2. Gọi stored procedure DeleteAccount
+                    sqlCommand.CommandText = "DeleteAccount";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtAccountId.Text));
 
                     // 3. Thực hiện kết nối và thực thi
@@ -291,19 +290,25 @@ namespace Lab_Advanced_Command
                     sqlCommand.Dispose();
 
                     // 5. Thông báo kết quả
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Xóa tài khoản thành công!",
-                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa tài khoản thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // 6. Reload danh sách và reset form
-                        LoadAccounts();
-                        ResetForm();
+                    // 6. Reload danh sách và reset form
+                    LoadAccounts();
+                    ResetForm();
+                }
+                catch (SqlException sqlEx)
+                {
+                    // Xử lý lỗi từ stored procedure
+                    if (sqlEx.Message.Contains("không thể xóa") || sqlEx.Message.Contains("đã có"))
+                    {
+                        MessageBox.Show(sqlEx.Message, "Không thể xóa",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        MessageBox.Show("Xóa tài khoản thất bại!",
-                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Lỗi SQL: {sqlEx.Message}", "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
