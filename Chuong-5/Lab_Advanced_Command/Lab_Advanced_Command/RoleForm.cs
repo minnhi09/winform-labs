@@ -28,10 +28,8 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    SELECT ID, RoleName, Description
-                    FROM Roles
-                    ORDER BY RoleName;";
+                sqlCommand.CommandText = "GetAllRoles";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlConnection.Open();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
@@ -95,17 +93,22 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    INSERT INTO Roles (RoleName, Description)
-                    VALUES (@RoleName, @Description);
-                    SELECT SCOPE_IDENTITY();";
+                sqlCommand.CommandText = "InsertRole";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@RoleName", txtRoleName.Text.Trim());
                 sqlCommand.Parameters.AddWithValue("@Description", 
                     string.IsNullOrWhiteSpace(txtDescription.Text) ? DBNull.Value : txtDescription.Text.Trim());
 
+                // Output parameter for new ID
+                SqlParameter idParam = new SqlParameter("@ID", SqlDbType.Int);
+                idParam.Direction = ParameterDirection.Output;
+                sqlCommand.Parameters.Add(idParam);
+
                 sqlConnection.Open();
-                int newId = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                sqlCommand.ExecuteNonQuery();
+                
+                int newId = Convert.ToInt32(idParam.Value);
 
                 sqlConnection.Close();
                 sqlCommand.Dispose();
@@ -118,9 +121,9 @@ namespace Lab_Advanced_Command
             }
             catch (SqlException sqlEx)
             {
-                if (sqlEx.Message.Contains("UNIQUE KEY") || sqlEx.Message.Contains("duplicate"))
+                if (sqlEx.Message.Contains("đã tồn tại"))
                 {
-                    MessageBox.Show("Tên vai trò đã tồn tại! Vui lòng chọn tên khác.",
+                    MessageBox.Show(sqlEx.Message,
                         "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtRoleName.Focus();
                     txtRoleName.SelectAll();
@@ -154,11 +157,8 @@ namespace Lab_Advanced_Command
                 SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                 SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = @"
-                    UPDATE Roles
-                    SET RoleName = @RoleName,
-                        Description = @Description
-                    WHERE ID = @ID;";
+                sqlCommand.CommandText = "UpdateRole";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtRoleId.Text));
                 sqlCommand.Parameters.AddWithValue("@RoleName", txtRoleName.Text.Trim());
@@ -166,30 +166,22 @@ namespace Lab_Advanced_Command
                     string.IsNullOrWhiteSpace(txtDescription.Text) ? DBNull.Value : txtDescription.Text.Trim());
 
                 sqlConnection.Open();
-                int rowsAffected = sqlCommand.ExecuteNonQuery();
+                sqlCommand.ExecuteNonQuery();
 
                 sqlConnection.Close();
                 sqlCommand.Dispose();
 
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("Cập nhật vai trò thành công!",
-                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Cập nhật vai trò thành công!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadRoles();
-                    ResetForm();
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật vai trò thất bại!",
-                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                LoadRoles();
+                ResetForm();
             }
             catch (SqlException sqlEx)
             {
-                if (sqlEx.Message.Contains("UNIQUE KEY") || sqlEx.Message.Contains("duplicate"))
+                if (sqlEx.Message.Contains("đã tồn tại"))
                 {
-                    MessageBox.Show("Tên vai trò đã tồn tại! Vui lòng chọn tên khác.",
+                    MessageBox.Show(sqlEx.Message,
                         "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtRoleName.Focus();
                     txtRoleName.SelectAll();
@@ -229,34 +221,27 @@ namespace Lab_Advanced_Command
                     SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
                     SqlCommand sqlCommand = sqlConnection.CreateCommand();
 
-                    sqlCommand.CommandText = "DELETE FROM Roles WHERE ID = @ID;";
+                    sqlCommand.CommandText = "DeleteRole";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtRoleId.Text));
 
                     sqlConnection.Open();
-                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
 
                     sqlConnection.Close();
                     sqlCommand.Dispose();
 
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Xóa vai trò thành công!",
-                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa vai trò thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        LoadRoles();
-                        ResetForm();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa vai trò thất bại!",
-                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    LoadRoles();
+                    ResetForm();
                 }
                 catch (SqlException sqlEx)
                 {
-                    if (sqlEx.Message.Contains("REFERENCE constraint"))
+                    if (sqlEx.Message.Contains("đang được sử dụng"))
                     {
-                        MessageBox.Show("Không thể xóa vai trò này vì đang được sử dụng bởi các tài khoản!",
+                        MessageBox.Show(sqlEx.Message,
                             "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
