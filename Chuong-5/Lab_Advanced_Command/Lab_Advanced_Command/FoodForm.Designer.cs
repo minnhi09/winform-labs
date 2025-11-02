@@ -32,16 +32,19 @@ namespace Lab_Advanced_Command
             lblTitle = new Label();
             lblCategory = new Label();
             cboCategory = new ComboBox();
+            lblSearch = new Label();
+            txtSearch = new TextBox();
             dgvFood = new DataGridView();
-            colID = new DataGridViewTextBoxColumn();
-            colName = new DataGridViewTextBoxColumn();
-            colUnit = new DataGridViewTextBoxColumn();
-            colCategoryName = new DataGridViewTextBoxColumn();
-            colPrice = new DataGridViewTextBoxColumn();
-            colNotes = new DataGridViewTextBoxColumn();
             contextMenuFood = new ContextMenuStrip(components);
             menuItemAdd = new ToolStripMenuItem();
             menuItemUpdate = new ToolStripMenuItem();
+            colID = new DataGridViewTextBoxColumn();
+            colName = new DataGridViewTextBoxColumn();
+            colUnit = new DataGridViewTextBoxColumn();
+            FoodCategoryID = new DataGridViewTextBoxColumn();
+            colCategoryName = new DataGridViewTextBoxColumn();
+            colPrice = new DataGridViewTextBoxColumn();
+            colNotes = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvFood).BeginInit();
             contextMenuFood.SuspendLayout();
             SuspendLayout();
@@ -78,6 +81,27 @@ namespace Lab_Advanced_Command
             cboCategory.TabIndex = 2;
             cboCategory.SelectedIndexChanged += cboCategory_SelectedIndexChanged;
             // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Font = new Font("Segoe UI", 10F);
+            lblSearch.Location = new Point(510, 80);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(119, 23);
+            lblSearch.TabIndex = 4;
+            lblSearch.Text = "Tìm theo tên:";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Font = new Font("Segoe UI", 10F);
+            txtSearch.Location = new Point(635, 76);
+            txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Nhập tên món ăn...";
+            txtSearch.Size = new Size(248, 30);
+            txtSearch.TabIndex = 5;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
             // dgvFood
             // 
             dgvFood.AllowUserToAddRows = false;
@@ -85,7 +109,7 @@ namespace Lab_Advanced_Command
             dgvFood.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvFood.BackgroundColor = SystemColors.Window;
             dgvFood.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFood.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colUnit, colCategoryName, colPrice, colNotes });
+            dgvFood.Columns.AddRange(new DataGridViewColumn[] { colID, colName, colUnit, FoodCategoryID, colCategoryName, colPrice, colNotes });
             dgvFood.ContextMenuStrip = contextMenuFood;
             dgvFood.Location = new Point(14, 133);
             dgvFood.Margin = new Padding(3, 4, 3, 4);
@@ -95,6 +119,27 @@ namespace Lab_Advanced_Command
             dgvFood.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvFood.Size = new Size(869, 451);
             dgvFood.TabIndex = 3;
+            // 
+            // contextMenuFood
+            // 
+            contextMenuFood.ImageScalingSize = new Size(20, 20);
+            contextMenuFood.Items.AddRange(new ToolStripItem[] { menuItemAdd, menuItemUpdate });
+            contextMenuFood.Name = "contextMenuFood";
+            contextMenuFood.Size = new Size(225, 52);
+            // 
+            // menuItemAdd
+            // 
+            menuItemAdd.Name = "menuItemAdd";
+            menuItemAdd.Size = new Size(224, 24);
+            menuItemAdd.Text = "➕ Thêm món ăn mới";
+            menuItemAdd.Click += menuItemAdd_Click;
+            // 
+            // menuItemUpdate
+            // 
+            menuItemUpdate.Name = "menuItemUpdate";
+            menuItemUpdate.Size = new Size(224, 24);
+            menuItemUpdate.Text = "✏️ Cập nhật món ăn";
+            menuItemUpdate.Click += menuItemUpdate_Click;
             // 
             // colID
             // 
@@ -123,6 +168,14 @@ namespace Lab_Advanced_Command
             colUnit.Name = "colUnit";
             colUnit.ReadOnly = true;
             // 
+            // FoodCategoryID
+            // 
+            FoodCategoryID.DataPropertyName = "FoodCategoryID";
+            FoodCategoryID.HeaderText = "Mã nhóm";
+            FoodCategoryID.MinimumWidth = 6;
+            FoodCategoryID.Name = "FoodCategoryID";
+            FoodCategoryID.ReadOnly = true;
+            // 
             // colCategoryName
             // 
             colCategoryName.DataPropertyName = "CategoryName";
@@ -150,33 +203,14 @@ namespace Lab_Advanced_Command
             colNotes.Name = "colNotes";
             colNotes.ReadOnly = true;
             // 
-            // contextMenuFood
-            // 
-            contextMenuFood.ImageScalingSize = new Size(20, 20);
-            contextMenuFood.Items.AddRange(new ToolStripItem[] { menuItemAdd, menuItemUpdate });
-            contextMenuFood.Name = "contextMenuFood";
-            contextMenuFood.Size = new Size(211, 80);
-            // 
-            // menuItemAdd
-            // 
-            menuItemAdd.Name = "menuItemAdd";
-            menuItemAdd.Size = new Size(210, 24);
-            menuItemAdd.Text = "➕ Thêm món ăn mới";
-            menuItemAdd.Click += menuItemAdd_Click;
-            // 
-            // menuItemUpdate
-            // 
-            menuItemUpdate.Name = "menuItemUpdate";
-            menuItemUpdate.Size = new Size(210, 24);
-            menuItemUpdate.Text = "✏️ Cập nhật món ăn";
-            menuItemUpdate.Click += menuItemUpdate_Click;
-            // 
             // FoodForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(896, 600);
             Controls.Add(dgvFood);
+            Controls.Add(txtSearch);
+            Controls.Add(lblSearch);
             Controls.Add(cboCategory);
             Controls.Add(lblCategory);
             Controls.Add(lblTitle);
@@ -198,15 +232,18 @@ namespace Lab_Advanced_Command
         private Label lblTitle;
         private Label lblCategory;
         private ComboBox cboCategory;
+        private Label lblSearch;
+        private TextBox txtSearch;
         private DataGridView dgvFood;
-        private DataGridViewTextBoxColumn colID;
-        private DataGridViewTextBoxColumn colName;
-        private DataGridViewTextBoxColumn colUnit;
-        private DataGridViewTextBoxColumn colCategoryName;
-        private DataGridViewTextBoxColumn colPrice;
-        private DataGridViewTextBoxColumn colNotes;
         private ContextMenuStrip contextMenuFood;
         private ToolStripMenuItem menuItemAdd;
         private ToolStripMenuItem menuItemUpdate;
+        private DataGridViewTextBoxColumn colID;
+        private DataGridViewTextBoxColumn colName;
+        private DataGridViewTextBoxColumn colUnit;
+        private DataGridViewTextBoxColumn FoodCategoryID;
+        private DataGridViewTextBoxColumn colCategoryName;
+        private DataGridViewTextBoxColumn colPrice;
+        private DataGridViewTextBoxColumn colNotes;
     }
 }

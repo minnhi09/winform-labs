@@ -70,6 +70,7 @@ namespace Lab_Advanced_Command
                     F.Name,
                     F.Unit,
                     C.Name AS CategoryName,
+                    C.ID AS FoodCategoryID,
                     F.Price,
                     F.Notes
                 FROM Foods F
@@ -98,58 +99,63 @@ namespace Lab_Advanced_Command
 
         private void menuItemAdd_Click(object sender, EventArgs e)
         {
-            // TODO: Xử lý logic thêm món ăn mới
-            MessageBox.Show(
-                "Chức năng thêm món ăn mới\n\nSẽ mở form để nhập thông tin món ăn mới:\n" +
-                "- Tên món ăn\n" +
-                "- Đơn vị tính\n" +
-                "- Nhóm món ăn\n" +
-                "- Đơn giá\n" +
-                "- Ghi chú",
-                "Thêm món ăn mới",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            FoodInfoForm foodInfoForm = new FoodInfoForm();
+            foodInfoForm.FormClosed += FoodInfoForm_FormClosed;
+
+            foodInfoForm.Show(this);
+        }
+
+        private void FoodInfoForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (cboCategory.SelectedValue != null && cboCategory.SelectedIndex != -1)
+            {
+                DataRowView dataRowView = cboCategory.SelectedItem as DataRowView;
+                int categoryId = Convert.ToInt32(dataRowView["ID"]);
+
+                LoadFoodByCategory(categoryId);
+            }
         }
 
         private void menuItemUpdate_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem có dòng nào được chọn không
             if (dgvFood.SelectedRows.Count == 0)
             {
-                MessageBox.Show(
-                    "Vui lòng chọn một món ăn để cập nhật!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                MessageBox.Show("Vui lòng chọn món ăn cần cập nhật.", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            // Lấy thông tin món ăn được chọn
             DataGridViewRow selectedRow = dgvFood.SelectedRows[0];
-            int foodId = Convert.ToInt32(selectedRow.Cells["colID"].Value);
-            string foodName = selectedRow.Cells["colName"].Value?.ToString() ?? "";
-            string unit = selectedRow.Cells["colUnit"].Value?.ToString() ?? "";
-            string categoryName = selectedRow.Cells["colCategoryName"].Value?.ToString() ?? "";
-            decimal price = Convert.ToDecimal(selectedRow.Cells["colPrice"].Value ?? 0);
-            string notes = selectedRow.Cells["colNotes"].Value?.ToString() ?? "";
+            DataRowView dataRowView = selectedRow.DataBoundItem as DataRowView;
 
-            // TODO: Xử lý logic cập nhật món ăn
-            MessageBox.Show(
-                $"Chức năng cập nhật món ăn\n\n" +
-                $"Thông tin món ăn đang chọn:\n" +
-                $"- Mã: {foodId}\n" +
-                $"- Tên: {foodName}\n" +
-                $"- Đơn vị: {unit}\n" +
-                $"- Nhóm: {categoryName}\n" +
-                $"- Giá: {price:N0} VNĐ\n" +
-                $"- Ghi chú: {notes}\n\n" +
-                $"Sẽ mở form để chỉnh sửa thông tin món ăn này.",
-                "Cập nhật món ăn",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            FoodInfoForm foodInfoForm = new FoodInfoForm();
+            foodInfoForm.FormClosed += FoodInfoForm_FormClosed;
+
+            foodInfoForm.Show(this);
+            foodInfoForm.DisplayFoodInfo(dataRowView);
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (foodTable == null) return;
+
+            string searchText = txtSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                // Hiển thị tất cả dữ liệu
+                dgvFood.DataSource = foodTable;
+            }
+            else
+            {
+                // Lọc dữ liệu theo tên món ăn
+                string filterExpression = $"Name LIKE '%{searchText.Replace("'", "''")}%'";
+                string sortExpression = "Price DESC";
+                DataViewRowState rowState = DataViewRowState.OriginalRows;
+
+                DataView dataView = new DataView(foodTable, filterExpression, sortExpression, rowState);
+                dgvFood.DataSource = dataView;
+            }
         }
     }
 }

@@ -57,6 +57,27 @@ namespace Lab_Advanced_Command
             cboCategory.ResetText();
         }
 
+        public void DisplayFoodInfo(DataRowView rowView)
+        {
+            try
+            {
+                txtFoodId.Text = rowView["ID"].ToString();
+                txtFoodName.Text = rowView["Name"].ToString();
+                txtUnit.Text = rowView["Unit"].ToString();
+                cboCategory.SelectedValue = rowView["FoodCategoryID"];
+                numPrice.Value = Convert.ToDecimal(rowView["Price"]);
+                txtNotes.Text = rowView["Notes"].ToString();
+
+                btnAdd.Enabled = false;
+                btnUpdate.Enabled = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error");
+                this.Close();
+            }
+        }
+
         private void btnAddNewCategory_Click(object sender, EventArgs e)
         {
             // TODO: Open form to add new category
@@ -135,7 +156,54 @@ namespace Lab_Advanced_Command
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // TODO: Update food logic
+            try 
+            {
+                // 1. Cấu hình kết nối
+                SqlConnection sqlConnection = new SqlConnection(CONNECTION_STRING);
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+
+                // 2. Cấu hình stored procedure
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = "UpdateFood";
+
+                // 3. Thêm parameters
+                sqlCommand.Parameters.AddWithValue("@ID", Convert.ToInt32(txtFoodId.Text));
+                sqlCommand.Parameters.AddWithValue("@Name", txtFoodName.Text);
+                sqlCommand.Parameters.AddWithValue("@Unit", txtUnit.Text);
+                sqlCommand.Parameters.AddWithValue("@FoodCategoryID", cboCategory.SelectedValue);
+                sqlCommand.Parameters.AddWithValue("@Price", (int)numPrice.Value);
+                sqlCommand.Parameters.AddWithValue("@Notes", txtNotes.Text);
+
+                // 4. Thực hiện kết nối và thực thi
+                sqlConnection.Open();
+                int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                // 5. Đóng kết nối
+                sqlConnection.Close();
+                sqlCommand.Dispose();
+
+                // 6. Thông báo kết quả
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Cập nhật món ăn thành công!", 
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật món ăn thất bại!", "Lỗi", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
