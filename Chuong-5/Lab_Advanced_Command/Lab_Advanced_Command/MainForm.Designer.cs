@@ -33,9 +33,14 @@ namespace Lab_Advanced_Command
             btnFoodManagement = new Button();
             btnAccountManagement = new Button();
             btnRoleManagement = new Button();
+            btnLogout = new Button();
             btnExit = new Button();
             panelButtons = new Panel();
+            panelUser = new Panel();
+            lblWelcome = new Label();
+            lblUsername = new Label();
             panelButtons.SuspendLayout();
+            panelUser.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -62,15 +67,51 @@ namespace Lab_Advanced_Command
             lblSubtitle.Text = "Vui lòng chọn chức năng bên dưới";
             lblSubtitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // panelUser
+            // 
+            panelUser.BackColor = Color.FromArgb(240, 248, 255);
+            panelUser.BorderStyle = BorderStyle.FixedSingle;
+            panelUser.Controls.Add(lblWelcome);
+            panelUser.Controls.Add(lblUsername);
+            panelUser.Location = new Point(100, 130);
+            panelUser.Name = "panelUser";
+            panelUser.Size = new Size(400, 60);
+            panelUser.TabIndex = 3;
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = false;
+            lblWelcome.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            lblWelcome.ForeColor = Color.FromArgb(0, 122, 204);
+            lblWelcome.Location = new Point(10, 8);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(380, 25);
+            lblWelcome.TabIndex = 0;
+            lblWelcome.Text = "Xin chào!";
+            lblWelcome.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblUsername
+            // 
+            lblUsername.AutoSize = false;
+            lblUsername.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            lblUsername.ForeColor = Color.Gray;
+            lblUsername.Location = new Point(10, 30);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(380, 20);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Tài khoản: ";
+            lblUsername.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // panelButtons
             // 
             panelButtons.Controls.Add(btnFoodManagement);
             panelButtons.Controls.Add(btnAccountManagement);
             panelButtons.Controls.Add(btnRoleManagement);
+            panelButtons.Controls.Add(btnLogout);
             panelButtons.Controls.Add(btnExit);
-            panelButtons.Location = new Point(100, 150);
+            panelButtons.Location = new Point(100, 200);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(400, 350);
+            panelButtons.Size = new Size(400, 440);
             panelButtons.TabIndex = 2;
             // 
             // btnFoodManagement
@@ -127,6 +168,24 @@ namespace Lab_Advanced_Command
             btnRoleManagement.MouseEnter += (s, e) => btnRoleManagement.BackColor = Color.FromArgb(142, 68, 173);
             btnRoleManagement.MouseLeave += (s, e) => btnRoleManagement.BackColor = Color.FromArgb(155, 89, 182);
             // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.FromArgb(241, 196, 15);
+            btnLogout.Cursor = Cursors.Hand;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(50, 290);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(300, 70);
+            btnLogout.TabIndex = 3;
+            btnLogout.Text = "🔓 Đăng xuất";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
+            btnLogout.MouseEnter += (s, e) => btnLogout.BackColor = Color.FromArgb(243, 156, 18);
+            btnLogout.MouseLeave += (s, e) => btnLogout.BackColor = Color.FromArgb(241, 196, 15);
+            // 
             // btnExit
             // 
             btnExit.BackColor = Color.FromArgb(231, 76, 60);
@@ -135,10 +194,10 @@ namespace Lab_Advanced_Command
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             btnExit.ForeColor = Color.White;
-            btnExit.Location = new Point(50, 290);
+            btnExit.Location = new Point(50, 380);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(300, 70);
-            btnExit.TabIndex = 2;
+            btnExit.TabIndex = 4;
             btnExit.Text = "🚪 Thoát";
             btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
@@ -150,7 +209,8 @@ namespace Lab_Advanced_Command
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(600, 520);
+            ClientSize = new Size(600, 660);
+            Controls.Add(panelUser);
             Controls.Add(panelButtons);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
@@ -159,7 +219,9 @@ namespace Lab_Advanced_Command
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Hệ thống quản lý - Chương 5";
+            Load += MainForm_Load;
             panelButtons.ResumeLayout(false);
+            panelUser.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -170,7 +232,11 @@ namespace Lab_Advanced_Command
         private Button btnFoodManagement;
         private Button btnAccountManagement;
         private Button btnRoleManagement;
+        private Button btnLogout;
         private Button btnExit;
         private Panel panelButtons;
+        private Panel panelUser;
+        private Label lblWelcome;
+        private Label lblUsername;
     }
 }
