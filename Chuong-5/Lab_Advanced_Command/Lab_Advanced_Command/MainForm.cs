@@ -28,6 +28,14 @@ namespace Lab_Advanced_Command
             foodForm.ShowDialog(this);
         }
 
+        private void btnOrderManagement_Click(object sender, EventArgs e)
+        {
+            OrdersForm ordersForm = new OrdersForm();
+            ordersForm.LoggedInAccountID = LoggedInAccountID;
+            ordersForm.LoggedInUsername = LoggedInUsername;
+            ordersForm.ShowDialog(this);
+        }
+
         private void btnAccountManagement_Click(object sender, EventArgs e)
         {
             AccountForm accountForm = new AccountForm();
